@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>login</title>
+
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/bootstrap/font/bootstrap-icons.css}">
+    <script th:src="@{/js/jquery-3.1.1.min.js}"></script>
+    <script th:src="@{bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+</head>
+
+<body>
+<div>
+    <div>
+        <div style="text-align: center">
+            <h1 class="header">login</h1>
+        </div>
+        <div>
+            <div>
+                <div>
+                    <div>
+
+                        <form id="login-form" method="post" onsubmit="return false;">
+                            <div>
+                                <label>Username</label>
+                                <div>
+                                    <i class="bi bi-person-fill"></i>
+                                    <input id="user" type="text" placeholder="Username" name="user">
+                                </div>
+                            </div>
+                            <div>
+                                <label>Password</label>
+                                <div>
+                                    <i class="bi bi-bag-fill"></i>
+                                    <input id="pwd" type="password" name="pwd">
+                                </div>
+                            </div>
+                            <input type="submit" onclick="login(this)"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center">
+            <h3>Spring Security</h3>
+        </div>
+    </div>
+</div>
+</body>
+</html>

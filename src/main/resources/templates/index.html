@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>home</title>
+    <!--    <link th:href="@{/css/semantic.min.css}" rel="stylesheet">-->
+    <!--    <link th:href="@{/css/common.css}" rel="stylesheet">-->
+    <!--    <script th:src="@{/js/jquery-3.1.1.min.js}"></script>-->
+    <!--    <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">-->
+    <!--    <script th:src="@{/js/main.js}"></script>-->
+
+    <!--引入外部的bootstrap中的css文件-->
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/bootstrap/font/bootstrap-icons.css}">
+    <!--jQuery文件务必在bootstrap.min.js之前引入-->
+    <script th:src="@{/js/jquery-3.1.1.min.js}"></script>
+    <!--再引入bootstrap.min.js-->
+    <script th:src="@{bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+</head>
+<body>
+<div class="container">
+    <div id="index-header-nav" th:fragment="nav-menu">
+        <div class="row">
+            <div class="col-7">
+                <a th:href="@{/index}"><i class="bi bi-house-door"></i>home</a>
+            </div>
+
+            <div class="col">
+                <div class="row row-cols-3">
+                    <div class="col-auto" sec:authorize="!isAuthenticated()">
+                        <a th:href="@{/toLogin}"><i class="bi bi-box-arrow-in-right"></i>
+                            login
+                        </a>
+                    </div>
+                    <div class="col-9" sec:authorize="isAuthenticated()">
+                        user：<span sec:authentication="name"> </span>
+                        User role：<span sec:authentication="authorities"></span>
+                    </div>
+                    <div class="col-auto" sec:authorize="isAuthenticated()">
+                        <a th:href="@{/}" onclick="logout()"><i class="bi bi-box-arrow-right"></i><i class="bi bi-person-fill"></i>
+                            logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center">
+        <h3>Spring Security</h3>
+    </div>
+
+    <div class="container-fluid">
+        <br>
+        <div class="row gx-5">
+            <div class="col">
+                <div class="p-3 border bg-light" sec:authorize="hasAnyRole('admin', 'user')">
+                    <div>
+                        <div>
+                            <h5>user 1</h5>
+                            <hr>
+                            <div><a th:href="@{/user/1}"><i class="bi bi-flag-fill"></i>user-1</a></div>
+                            <div><a th:href="@{/user/2}"><i class="bi bi-flag-fill"></i>user-2</a></div>
+                            <div><a th:href="@{/user/3}"><i class="bi bi-flag-fill"></i>user-3</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="p-3 border bg-light" sec:authorize="hasAnyRole('admin')">
+                    <div>
+                        <div>
+                            <h5>admin</h5>
+                            <hr>
+                            <div><a th:href="@{/admin/1}"><i class="bi bi-flag-fill"></i>admin-1</a></div>
+                            <div><a th:href="@{/admin/2}"><i class="bi bi-flag-fill"></i>admin-2</a></div>
+                            <div><a th:href="@{/admin/3}"><i class="bi bi-flag-fill"></i>admin-3</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="p-3 border bg-light" sec:authorize="hasAnyRole('admin', 'user', 'guest')">
+                    <div>
+                        <div>
+                            <h5>guest</h5>
+                            <hr>
+                            <div><a th:href="@{/guest/1}"><i class="bi bi-flag-fill"></i>guest-1</a></div>
+                            <div><a th:href="@{/guest/2}"><i class="bi bi-flag-fill"></i>guest-2</a></div>
+                            <div><a th:href="@{/guest/3}"><i class="bi bi-flag-fill"></i>guest-3</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div style="text-align: center" sec:authorize="hasAnyRole('admin', 'user', 'guest')">
+            <label for="token_view">トークン：</label>
+            <h6 class="badge bg-info text-wrap" style="width: 66rem;" id="token_view"></h6>
+        </div>
+        <div class="row gx-5" style="text-align: center" sec:authorize="hasAnyRole('admin', 'user', 'guest')">
+            <div class="col-auto mx-auto">
+                <input type="button" class="btn btn-outline-primary" id="tokencheck_success" onclick="tokencheck(1)"
+                       value="tokencheck_success"/>
+            </div>
+            <div class="col-auto mx-auto">
+                <input type="button" class="btn btn-outline-primary" id="tokencheck_failure" onclick="tokencheck(2)"
+                       value="tokencheck_failure"/>
+            </div>
+            <label for="tokencheck_result">トークンチェック結果：</label>
+            <div id="tokencheck_result"></div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+<script>
+    $("#token_view").text(localStorage.getItem("token"));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</html>

@@ -1,0 +1,24 @@
+
+spring:
+  thymeleaf:
+    cache: false
+  redis:
+    host: localhost
+    port: 6379
+    timeout: 10s
+    lettuce:
+      pool:
+        min-idle: 0
+        max-idle: 8
+        max-active: 8
+        max-wait: -1ms
+server:
+  port: 8081
+
+token:
+  expire:
+    seconds: 15
+  jwtSecret: (SYLINX:)_$^11244^%$_(ZJ:)_@@++--(SPRING:)_++++_.sds_(SECURITY:)
+
+service:
+  dns: http://localhost:8082/
